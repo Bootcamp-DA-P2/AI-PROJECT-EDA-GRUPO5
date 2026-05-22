@@ -32,11 +32,10 @@ Para ejecutar correctamente el proyecto, la estructura debe ser la siguiente:
 ```
 /data
     national_history.csv
-/notebooks
-    (notebook principal del análisis)
 /report
     Reporte Covid-19.pdf
 /.venv
+eda_covid.ipynb
 requirements.txt
 README.md
 ```
