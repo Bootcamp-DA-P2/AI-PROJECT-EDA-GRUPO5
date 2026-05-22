@@ -1,54 +1,145 @@
-# Análisis Estadístico y Exploratorio de Datos (EDA) - Impacto del COVID-19
+# 📊 Análisis Estadístico y Exploratorio de Datos (EDA) - Impacto del COVID-19
 
-Este repositorio contiene el análisis exploratorio y la validación estadística de un conjunto de datos sobre la evolución de la pandemia de COVID-19. El objetivo principal del proyecto fue analizar la relación entre el incremento diario de casos positivos y el incremento de muertes, así como evaluar los cambios de comportamiento de la pandemia a través del tiempo.
+Este repositorio contiene un análisis exploratorio de datos (EDA) y validación estadística sobre la evolución de la pandemia de COVID-19 en Estados Unidos. El objetivo principal es analizar la relación entre el incremento diario de casos positivos y el incremento de muertes, así como estudiar la evolución temporal de la pandemia y sus patrones estadísticos.
 
 ---
 
 ## 👥 Autores
-* Elena Suárez Serrano
-* Rita Romero
-* Daniel Luque Gallardo
+- Elena Suárez Serrano  
+- Rita Romero  
+- Daniel Luque Gallardo  
 
 ---
 
-## 🛠️ Tecnologías Usadas
-* **Pandas** (Estructuración y manipulación de series de datos)
-* **Statsmodels** (Regresión OLS y diagnósticos)
-* **Scipy.stats** (Pruebas de Levene, Shapiro-Wilk, T-Test y Mann-Whitney U)
-* **Matplotlib & Seaborn** (Visualización de datos avanzada)
-* **missingno** (Visualización de valores nulos)
-* **sklearn.impute** (Imputación de valores nulos)
+## 📂 Dataset
+
+El dataset utilizado se ha obtenido de:
+
+https://covidtracking.com/data/download
+
+Este proyecto trabaja con el archivo:
+
+```
+national_history.csv
+```
+
+---
+
+## 📁 Estructura del proyecto
+
+Para ejecutar correctamente el proyecto, la estructura debe ser la siguiente:
+
+```
+/data
+    national_history.csv
+/notebooks
+    (notebook principal del análisis)
+/report
+    Reporte Covid-19.pdf
+/.venv
+requirements.txt
+README.md
+```
+
+---
+
+## ⚙️ Requisitos de ejecución
+
+### 1. Crear entorno virtual
+```bash
+python -m venv .venv
+```
+
+### 2. Activar entorno virtual
+
+**Windows:**
+```bash
+.venv\Scripts\activate
+```
+
+**Mac/Linux:**
+```bash
+source .venv/bin/activate
+```
+
+### 3. Instalar dependencias
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Ejecutar el notebook
+Abrir y ejecutar el notebook dentro del entorno virtual.
+
+---
+
+## 🛠️ Tecnologías usadas
+
+- Pandas → Manipulación y análisis de datos  
+- NumPy → Operaciones numéricas  
+- Matplotlib & Seaborn → Visualización de datos  
+- Statsmodels → Modelos de regresión OLS  
+- SciPy.stats → Tests estadísticos (Shapiro, Levene, T-test, Mann-Whitney U)  
+- missingno → Visualización de valores nulos  
+- sklearn.impute → Imputación de valores faltantes  
 
 ---
 
 ## 🎯 Objetivo del proyecto
-El objetivo principal del proyecto es realizar un EDA (Exploration Data Analysis) del dataset de `The COVID Tracking Project National Data`. En el hemos :
-1. **Carga y Vsisualización rápidad de los datos:** Obtener los datos provenientes del dataset y realizar un análisis rápido de la composición del dataset.
-2. **Conversiones Necesarias:** Realizar las conversiones necesarias para conseguir tener un dataset con el formato de las variables deseado.
-3. **Dsitribuciones:** Comprender como son nuestros datos y poder identificar patrones, tendencias, valores outliers de forma visual.
-4. **Correlaciones y ScatterPlot:** Indentificar como de correlacionadas están nuestras variables del dataset.
-5. **Detección y Tratamiento de Valores Outliers y Nulos :** Indentificar y tratar de valores outliers y nulos.
-6. **Correlaciones y ScatterPlot:** Indentificar como de correlacionadas están nuestras variables del dataset.
-7. **Feature Engineering:** Creación de variables derivadas de las variables ya presentes en el dataset.
-8. **Regresión Lineal y Test estadísticos:** Visualización de las correlaciones entre dos variables mediante la regresión y uso de pruebas estadísticas para comprobar la normalidad de los datos y correlaciones.
-8. **Gráficas Interesantes:** Creación de diferentes gráficas para visualizar patrones, tendencias y evidencias durante la pandemia.
 
+El objetivo principal es realizar un análisis exploratorio completo del dataset *The COVID Tracking Project National Data*, con el fin de comprender la evolución de la pandemia y la relación entre variables clave.
+
+### Etapas del análisis:
+
+1. Carga y exploración inicial de datos  
+2. Transformación y limpieza del dataset  
+3. Análisis de distribuciones y outliers  
+4. Análisis de correlaciones y visualización  
+5. Tratamiento de valores nulos  
+6. Feature Engineering  
+7. Modelado estadístico (regresión lineal OLS)  
+8. Pruebas de hipótesis  
+9. Visualización de patrones temporales  
 
 ---
 
-## 📋 Decisiones Tomadas
+## 📌 Decisiones tomadas
 
 ### 1. Tratamiento de valores nulos y outliers
-* **Decisión:** Los valores outliers no se trataron y los valores nulos hemos usado el `SimpleImputer` para las variables `death', `negative`. Para el nulo de `positive` se ha eliminaod el registro y para el resto se ha imputado con 0.
+Se decidió mantener los outliers para conservar la naturaleza real de la pandemia.  
+Los valores nulos se trataron de la siguiente forma:
+- `death` y `negative` → imputación con técnicas de relleno  
+- `positive` → eliminación de registros nulos  
+- resto de variables → imputación con 0 cuando fue necesario  
 
+---
 
-### 2. Modelado Inicial: Regresión Lineal OLS
-* **Decisión:** Se entrenó un modelo de Mínimos Cuadrados Ordinarios (OLS) para predecir `hospitalizedIncrease` ~ `positiveIncrease`,  `deathIncrease` ~ `positiveIncrease` y `positiveIncrease` ~ `totalTestResultsIncrease`.
+### 2. Modelado estadístico (OLS)
+Se aplicaron modelos de regresión lineal para estudiar relaciones entre variables:
 
-### 3. Prueba de Hipótesis
-* **Decisión:** Ver si los incrementos diarios siguen uan distribución normal.
+- `hospitalizedIncrease ~ positiveIncrease`  
+- `deathIncrease ~ positiveIncrease`  
+- `positiveIncrease ~ totalTestResultsIncrease`  
 
+---
 
-*
-El análisis demuestra que existe una correlación de muertes y incrementos de contagios, pero al ser datos temporales en los que la variable `tiempo` esta vinculada directamente necesitamos de un modelo más complejo para poder realizar una inferencia correcta y obtener conclusiones cientificamente más validadas.
-*
+### 3. Pruebas de hipótesis
+Se evaluó la normalidad de las variables mediante:
+- Shapiro-Wilk  
+- Levene  
+- T-test  
+- Mann-Whitney U  
+
+---
+
+### 4. Conclusión analítica
+El análisis muestra una correlación clara entre el aumento de contagios y el incremento de muertes. Sin embargo, al tratarse de datos temporales dependientes del tiempo, un modelo lineal simple no es suficiente para capturar completamente la dinámica del fenómeno, siendo necesario un enfoque estadístico más avanzado para inferencias más robustas.
+
+---
+
+## 📄 Informe final
+
+El informe completo se encuentra en:
+
+```
+/report/Reporte Covid-19.pdf
+```
